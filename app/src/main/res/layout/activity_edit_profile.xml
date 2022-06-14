@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+
+    tools:context=".Auth.EditProfile">
+
+
+    <TextView
+        android:id="@+id/edit_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/et_margin_vertical"
+        android:layout_marginTop="@dimen/et_margin_vertical"
+        android:layout_marginBottom="@dimen/et_margin_vertical"
+        android:drawableLeft="@drawable/ic_baseline_arrow_back_ios_24"
+        android:text="Home"
+        android:textColor="@color/blue"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/edit_logo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/edit_back"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/et_margin_vertical"
+        android:layout_marginBottom="@dimen/et_margin_vertical"
+        android:orientation="vertical"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/edit_welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_logo"
+        android:layout_centerHorizontal="true"
+        android:text="Sign Up"
+        android:textColor="@color/blue"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_welcome_text"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edit_email_et"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginStart="@dimen/et_margin_start_end"
+            android:layout_marginTop="@dimen/et_margin_vertical"
+            android:layout_marginEnd="@dimen/et_margin_start_end"
+            android:background="@drawable/edit_text_shape"
+            android:gravity="center"
+            android:hint="Email"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edit_name_et"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginStart="@dimen/et_margin_start_end"
+            android:layout_marginTop="@dimen/et_margin_vertical"
+            android:layout_marginEnd="@dimen/et_margin_start_end"
+            android:background="@drawable/edit_text_shape"
+            android:gravity="center"
+            android:hint="Name"
+            android:textSize="18sp" />
+
+
+        <EditText
+            android:id="@+id/edit_phone_et"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginStart="@dimen/et_margin_start_end"
+            android:layout_marginTop="@dimen/et_margin_vertical"
+            android:layout_marginEnd="@dimen/et_margin_start_end"
+            android:background="@drawable/edit_text_shape"
+            android:gravity="center"
+            android:hint="Phone Number"
+            android:inputType="phone"
+            android:textSize="18sp"
+            android:visibility="visible" />
+
+        <EditText
+            android:id="@+id/edit_password_et"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginStart="@dimen/et_margin_start_end"
+            android:layout_marginTop="@dimen/et_margin_vertical"
+            android:layout_marginEnd="@dimen/et_margin_start_end"
+            android:background="@drawable/edit_text_shape"
+            android:gravity="center"
+            android:hint="Old Password"
+            android:inputType="textPassword"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edit_new_password_et"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginStart="@dimen/et_margin_start_end"
+            android:layout_marginTop="@dimen/et_margin_vertical"
+            android:layout_marginEnd="@dimen/et_margin_start_end"
+            android:background="@drawable/edit_text_shape"
+            android:gravity="center"
+            android:hint="New Password"
+            android:inputType="textPassword"
+            android:textSize="18sp" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/edit_save_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginStart="@dimen/et_margin_start_end"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="@dimen/et_margin_start_end"
+            android:layout_marginBottom="@dimen/et_margin_vertical"
+            android:background="@drawable/button_shape_blue"
+            android:text="Save"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/edit_logout_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginStart="@dimen/et_margin_start_end"
+            android:layout_marginEnd="@dimen/et_margin_start_end"
+            android:layout_marginBottom="@dimen/et_margin_vertical"
+            android:background="@drawable/button_shape_blue"
+            android:text="Log Out"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

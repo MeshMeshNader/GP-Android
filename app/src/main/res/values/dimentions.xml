@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="et_margin_start_end">35dp</dimen>
+    <dimen name="et_margin_small_start_end">16dp</dimen>
+    <dimen name="et_margin_vertical">12dp</dimen>
+    <dimen name="et_height">50dp</dimen>
+    <dimen name="et_corners_radius">10dp</dimen>
+    <dimen name="box_w_and_h">10dp</dimen>
+    <dimen name="corners_images_dim">35dp</dimen>
+
+    <dimen name="margin_start_end">@dimen/_18sdp</dimen>
+    <dimen name="margin_mid_start_end">@dimen/_12sdp</dimen>
+    <dimen name="margin_small_start_end">@dimen/_10sdp</dimen>
+    <dimen name="margin_tiny_start_end">@dimen/_6sdp</dimen>
+
+
+    <!--    <dimen name="et_margin_mid_start_end">25dp</dimen>-->
+
+
+    <dimen name="small_icons_size">@dimen/_25sdp</dimen>
+    <dimen name="tiny_text_size">@dimen/_12sdp</dimen>
+    <dimen name="small_text_size">@dimen/_15sdp</dimen>
+    <dimen name="mid_text_size">@dimen/_18sdp</dimen>
+    <dimen name="small_item_drawable_padding">@dimen/_8sdp</dimen>
+
+
+</resources>

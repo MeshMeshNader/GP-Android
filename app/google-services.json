@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "97918014032",
+    "firebase_url": "https://gp-firebase-43148-default-rtdb.firebaseio.com",
+    "project_id": "gp-firebase-43148",
+    "storage_bucket": "gp-firebase-43148.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97918014032:android:0a35888ed525d8e3083755",
+        "android_client_info": {
+          "package_name": "com.grad.gp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "97918014032-ojdqpcdr3co7g1r7h27jei5nihv633am.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9Bn8X8ZmCO6Os8WJMHRQ8UM2fr6gZccM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "97918014032-ojdqpcdr3co7g1r7h27jei5nihv633am.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

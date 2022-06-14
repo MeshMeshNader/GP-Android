@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".Auth.Login">
+
+    <ImageView
+        android:id="@+id/login_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/login_logo_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_logo"
+        android:layout_centerHorizontal="true"
+        android:text="Login"
+        android:textColor="@color/blue"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/login_email_et"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginStart="@dimen/et_margin_start_end"
+            android:layout_marginTop="@dimen/et_margin_vertical"
+            android:layout_marginEnd="@dimen/et_margin_start_end"
+            android:background="@drawable/edit_text_shape"
+            android:gravity="center"
+            android:hint="Email"
+            android:textSize="18sp" />
+
+
+        <EditText
+            android:id="@+id/login_password_et"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginStart="@dimen/et_margin_start_end"
+            android:layout_marginTop="@dimen/et_margin_vertical"
+            android:layout_marginEnd="@dimen/et_margin_start_end"
+            android:background="@drawable/edit_text_shape"
+            android:gravity="center"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textSize="18sp" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/login_login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginStart="@dimen/et_margin_start_end"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="@dimen/et_margin_start_end"
+            android:layout_marginBottom="@dimen/et_margin_vertical"
+            android:background="@drawable/button_shape_blue"
+            android:text="Login"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="35dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create An Account, "
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/login_create_an_acc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign Up"
+            android:textColor="@color/blue"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

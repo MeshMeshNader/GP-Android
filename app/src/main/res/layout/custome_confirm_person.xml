@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="350dp"
+        android:layout_height="450dp"
+        android:background="@drawable/button_shape_white">
+
+        <TextView
+            android:id="@+id/confirm_dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:padding="5dp"
+            android:text="This is Unknown Person"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/_17sdp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/confirm_dialog_person_image"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_below="@id/confirm_dialog_title"
+            android:layout_centerHorizontal="true"
+            android:padding="15dp"
+            android:scaleType="fitCenter" />
+
+        <EditText
+            android:id="@+id/confirm_dialog_person_name_et"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_below="@id/confirm_dialog_person_image"
+            android:layout_marginStart="@dimen/et_margin_start_end"
+            android:layout_marginTop="@dimen/et_margin_vertical"
+            android:layout_marginEnd="@dimen/et_margin_start_end"
+            android:background="@drawable/edit_text_shape"
+            android:gravity="center"
+            android:hint="Enter Person Name"
+            android:textSize="18sp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/confirm_dialog_person_name_et"
+            android:layout_marginTop="@dimen/et_margin_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/small_text_size"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/dialog_save_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/margin_tiny_start_end"
+                android:layout_weight="1"
+                android:background="@drawable/button_shape_blue"
+                android:text="Save"
+                android:textColor="@color/white"
+                android:textSize="@dimen/tiny_text_size" />
+
+            <Button
+                android:id="@+id/dialog_cancel_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_tiny_start_end"
+                android:layout_weight="1"
+                android:background="@drawable/button_shape_blue"
+                android:text="Cancel"
+                android:textColor="@color/white"
+                android:textSize="@dimen/tiny_text_size" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
