@@ -5,7 +5,7 @@
 
     <RelativeLayout
         android:layout_width="350dp"
-        android:layout_height="450dp"
+        android:layout_height="550dp"
         android:background="@drawable/button_shape_white">
 
         <TextView
@@ -39,14 +39,29 @@
             android:layout_marginEnd="@dimen/et_margin_start_end"
             android:background="@drawable/edit_text_shape"
             android:gravity="center"
-            android:hint="Enter Person Name"
+            android:textColorHint="@color/gray"
+            android:hint="Person Name"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/confirm_dialog_person_relative_relation_et"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_below="@id/confirm_dialog_person_name_et"
+            android:layout_marginStart="@dimen/et_margin_start_end"
+            android:layout_marginTop="@dimen/et_margin_vertical"
+            android:layout_marginEnd="@dimen/et_margin_start_end"
+            android:background="@drawable/edit_text_shape"
+            android:gravity="center"
+            android:textColorHint="@color/gray"
+            android:hint="Person Relative Relation"
             android:textSize="18sp" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/confirm_dialog_person_name_et"
+            android:layout_below="@id/confirm_dialog_person_relative_relation_et"
             android:layout_marginTop="@dimen/et_margin_vertical"
             android:orientation="horizontal"
             android:padding="@dimen/small_text_size"

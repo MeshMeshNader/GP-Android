@@ -1,19 +1,24 @@
 package com.grad.gp.Home;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.speech.tts.TextToSpeech;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +27,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -40,6 +46,7 @@ import com.google.firebase.storage.UploadTask;
 import com.grad.gp.Common.APIService;
 import com.grad.gp.Common.WebServiceClient;
 import com.grad.gp.Home.Dialogs.ConfirmPerson;
+import com.grad.gp.Home.Gallery.GalleryActivity;
 import com.grad.gp.Models.ImageResponse;
 import com.grad.gp.Models.UserDataModel;
 import com.grad.gp.R;
@@ -52,6 +59,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
@@ -62,12 +70,17 @@ import retrofit2.Response;
 
 public class Zhaimer extends AppCompatActivity implements ConfirmPerson.getDataDialogListener {
 
+    ImageView mBackBtn;
     final static int Gallery_Pick = 1;
+    private static final int CAMERA_REQUEST = 1888;
+    private static final int MY_CAMERA_PERMISSION_CODE = 100;
     ImageView mFaceRecBtn;
+    ImageView mPersonResponse;
     TextView mFaceRecResponse;
+    Button mGalleryBtn;
     CustomProgress mCustomProgress = CustomProgress.getInstance();
     final String TAG = "Zhaimer Activity";
-
+    TextToSpeech ttsEN;
     String currentUserID;
     FirebaseUser user;
     DatabaseReference mUsersRef;
@@ -83,12 +96,29 @@ public class Zhaimer extends AppCompatActivity implements ConfirmPerson.getDataD
         setContentView(R.layout.activity_zhaimer);
 
         initViews();
-
+        ttsEN = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR)
+                    ttsEN.setLanguage(Locale.forLanguageTag("en"));
+            }
+        });
     }
 
     private void initViews() {
+        mBackBtn=findViewById(R.id.edit_back);
+        mBackBtn.setOnClickListener(v -> onBackPressed());
         mFaceRecBtn = findViewById(R.id.face_recognition_btn);
         mFaceRecResponse = findViewById(R.id.face_recognition_response);
+        mPersonResponse = findViewById(R.id.person_image_response);
+        mGalleryBtn = findViewById(R.id.gallery_btn);
+        mGalleryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Zhaimer.this, GalleryActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -151,8 +181,12 @@ public class Zhaimer extends AppCompatActivity implements ConfirmPerson.getDataD
     }
 
     private void takePhoto() {
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        startActivity(intent);
+        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+        } else {
+            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(cameraIntent, CAMERA_REQUEST);
+        }
     }
 
     @AfterPermissionGranted(101)
@@ -189,6 +223,15 @@ public class Zhaimer extends AppCompatActivity implements ConfirmPerson.getDataD
                 }
             }
         }
+        if (requestCode == MY_CAMERA_PERMISSION_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+            } else {
+                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
 
@@ -198,6 +241,10 @@ public class Zhaimer extends AppCompatActivity implements ConfirmPerson.getDataD
         JSONObject obj = new JSONObject();
         String encodings = "";
         Map<String, String> encodingMap = userData.getEncodings();
+        Map<String, String> mPersonsData = userData.getPersonsData();
+        Map<String, String> mPersonsImages = userData.getImagesURLs();
+        Log.e(TAG, "requestOutput: " + mPersonsData.get("Yasmeen"));
+
 
         if (encodingMap != null) {
             for (Map.Entry<String, String> set : encodingMap.entrySet()) {
@@ -212,7 +259,7 @@ public class Zhaimer extends AppCompatActivity implements ConfirmPerson.getDataD
             encodings = encodings.replace(":\"", ":");
             encodings = encodings.replace("\",", ",");
             encodings = encodings.replace("]\"", "]");
-        }else{
+        } else {
             encodings = "";
         }
 
@@ -232,12 +279,10 @@ public class Zhaimer extends AppCompatActivity implements ConfirmPerson.getDataD
                     Log.e("Success", "onResponse: " + response.code());
                     Log.e("Success", "onResponse: " + response.toString());
                     Log.e("Success", "onResponse: " + response.body().getOutput());
-//                    Output = response.body().getOutput();
-                    mFaceRecResponse.setText(response.body().getOutput());
-                    mCustomProgress.hideProgress();
 
 
                     if (response.body().getOutput().equals("I Found Unknown Person")) {
+                        mCustomProgress.hideProgress();
                         FragmentTransaction ft = getFragmentManager().beginTransaction();
                         DialogFragment dialogFragment = new ConfirmPerson();
 
@@ -247,7 +292,21 @@ public class Zhaimer extends AppCompatActivity implements ConfirmPerson.getDataD
                         dialogFragment.setArguments(args);
                         dialogFragment.show(ft, "dialog");
                     } else {
-                        mFaceRecResponse.setText(response.body().getOutput());
+                        String personNameResponse = response.body().getOutput();
+                        personNameResponse = personNameResponse.replace("I Found ", "");
+
+                        String url = mPersonsImages.get(personNameResponse);
+
+                        try {
+                            Glide.with(getApplicationContext()).load(url).into(mPersonResponse);
+                        } catch (Exception e) {
+                            Log.e(TAG, "onResponse: " + e.getMessage());
+                        }
+
+                        String resultRelative = mPersonsData.get(personNameResponse);
+                        String finalResult = response.body().getOutput() + " your " + resultRelative;
+                        ttsEN.speak(finalResult, TextToSpeech.QUEUE_FLUSH, null);
+                        mFaceRecResponse.setText(finalResult);
                         mCustomProgress.hideProgress();
                     }
 
@@ -296,12 +355,15 @@ public class Zhaimer extends AppCompatActivity implements ConfirmPerson.getDataD
                     }
                 }
             }
+        } else if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            requestOutput(photo);
         }
     }
 
 
     @Override
-    public void onFinishDialog(String name, Bitmap bitmap) {
+    public void onFinishDialog(String name, String relativeRElation, Bitmap bitmap) {
 
         mCustomProgress.showProgress(this, "Please Wait, The image is Under Processing", false);
         mImagesURL = userData.getImagesURLs();
@@ -343,23 +405,19 @@ public class Zhaimer extends AppCompatActivity implements ConfirmPerson.getDataD
                     public void onComplete(@NonNull Task<Uri> task) {
                         if (task.isSuccessful()) {
                             mImagesURL.put(name, task.getResult().toString());
-                            requestTraining(name);
+                            requestTraining(name, relativeRElation);
                             Log.e(TAG, "onComplete: Image Uploaded Successfully" + task.getResult().toString());
                             mCustomProgress.hideProgress();
-//                                        Log.e(TAG, "onActivityResult: selected images" + mImagesURL.size());
                         }
-//                                    adapter = new AddPostImagesAdapter(mImagesURL, AddDetailsTemp.this);
-//                                    mImagesRecyclerView.setAdapter(adapter);
-                        mCustomProgress.hideProgress();
                     }
                 });
-
+                mCustomProgress.hideProgress();
             }
         });
     }
 
 
-    public void requestTraining(String name) {
+    public void requestTraining(String name, String personRelativeRelation) {
         mUsersRef.child("ImagesURLs").setValue(mImagesURL).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -393,8 +451,6 @@ public class Zhaimer extends AppCompatActivity implements ConfirmPerson.getDataD
                                 Log.e("Success", "onResponse: " + response.body().getOutput());
 
                                 JSONObject newData = new JSONObject(response.body().getOutput());
-
-//                                Log.e(TAG, "onResponse: >>>>>>>>>>>" + newData.get(name));
                                 Map<String, String> map = userData.getEncodings();
                                 if (map == null) {
                                     map = new HashMap<>();
@@ -407,23 +463,38 @@ public class Zhaimer extends AppCompatActivity implements ConfirmPerson.getDataD
                                     }
                                 });
 
+                                Map<String, String> map2 = userData.getPersonsData();
+                                if (map2 == null) {
+                                    map2 = new HashMap<>();
+                                }
+                                map2.put(name, personRelativeRelation);
+                                mUsersRef.child("personsData").setValue(map2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        Log.e(TAG, "onComplete: Training and Saving Data Done Successfully");
+                                    }
+                                });
+                                Toast.makeText(Zhaimer.this, "Data Saved Successfully, Now you can use it", Toast.LENGTH_LONG).show();
+                                mCustomProgress.hideProgress();
                             } catch (Exception e) {
 
-
+                                mCustomProgress.hideProgress();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<ImageResponse> call, Throwable t) {
                             Log.e("Fail", "onFailure: " + t.getMessage());
-
+                            mCustomProgress.hideProgress();
                         }
 
                     });
+                    mCustomProgress.hideProgress();
 
-
-                } else
+                } else {
                     Log.e("EditProfile", "onComplete: Error on Saving Data " + task.getException().toString());
+                    mCustomProgress.hideProgress();
+                }
             }
         });
     }

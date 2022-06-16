@@ -19,6 +19,7 @@ public class ConfirmPerson extends DialogFragment {
 
 
     private TextView mPersonName;
+    private TextView mPersonRelativeRelation;
     private Button SaveBtn, CancelBtn;
     private ImageView mPersonImage;
     private getDataDialogListener listener;
@@ -37,6 +38,7 @@ public class ConfirmPerson extends DialogFragment {
         mPersonImage = v.findViewById(R.id.confirm_dialog_person_image);
         mPersonImage.setImageBitmap(bitmap);
         mPersonName = v.findViewById(R.id.confirm_dialog_person_name_et);
+        mPersonRelativeRelation = v.findViewById(R.id.confirm_dialog_person_relative_relation_et);
         SaveBtn = v.findViewById(R.id.dialog_save_btn);
         CancelBtn = v.findViewById(R.id.dialog_cancel_btn);
 
@@ -46,9 +48,11 @@ public class ConfirmPerson extends DialogFragment {
             public void onClick(View v) {
                 //Toast.makeText(getActivity(),myAddress.getText().toString(),Toast.LENGTH_LONG).show();
                 if (mPersonName.getText().toString().isEmpty()) {
-                    Toast.makeText(getActivity(), "Enter The Person Name", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Enter Person Name", Toast.LENGTH_LONG).show();
+                } else if (mPersonRelativeRelation.getText().toString().isEmpty()) {
+                    Toast.makeText(getActivity(), "Enter Person Relative Relation", Toast.LENGTH_LONG).show();
                 } else {
-                    listener.onFinishDialog(mPersonName.getText().toString(), bitmap);
+                    listener.onFinishDialog(mPersonName.getText().toString(), mPersonRelativeRelation.getText().toString(), bitmap);
                 }
                 dismiss();
             }
@@ -67,7 +71,7 @@ public class ConfirmPerson extends DialogFragment {
 
 
     public interface getDataDialogListener {
-        void onFinishDialog(String name, Bitmap bitmap);
+        void onFinishDialog(String name, String relativeRelation, Bitmap bitmap);
     }
 
 

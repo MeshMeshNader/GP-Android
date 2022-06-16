@@ -4,50 +4,75 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-
     tools:context=".Auth.EditProfile">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/blue">
 
-    <TextView
-        android:id="@+id/edit_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="@dimen/et_margin_vertical"
-        android:layout_marginTop="@dimen/et_margin_vertical"
-        android:layout_marginBottom="@dimen/et_margin_vertical"
-        android:drawableLeft="@drawable/ic_baseline_arrow_back_ios_24"
-        android:text="Home"
-        android:textColor="@color/blue"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/edit_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:contentDescription="Back"
+                android:src="@drawable/ic_baseline_arrow_back_ios_24" />
+
+            <TextView
+                android:id="@+id/admin_page_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="5dp"
+                android:contentDescription="Edit Profile Page"
+                android:text="Edit Profile"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
 
     <ImageView
         android:id="@+id/edit_logo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_below="@id/edit_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tool_bar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/et_margin_vertical"
-        android:layout_marginBottom="@dimen/et_margin_vertical"
+        android:contentDescription="Application_Name Logo"
         android:orientation="vertical"
         android:src="@drawable/logo" />
 
-    <TextView
-        android:id="@+id/edit_welcome_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/edit_logo"
-        android:layout_centerHorizontal="true"
-        android:text="Sign Up"
-        android:textColor="@color/blue"
-        android:textSize="25sp" />
+    <!--    <TextView-->
+    <!--        android:id="@+id/edit_welcome_text"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@id/edit_logo"-->
+    <!--        android:layout_centerHorizontal="true"-->
+    <!--        android:text="Edit Profile"-->
+    <!--        android:textColor="@color/blue"-->
+    <!--        android:textSize="25sp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        />-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edit_welcome_text"
+        android:layout_below="@id/edit_logo"
+        android:layout_centerInParent="true"
         android:layout_marginTop="15dp"
         android:orientation="vertical">
 
@@ -59,8 +84,10 @@
             android:layout_marginTop="@dimen/et_margin_vertical"
             android:layout_marginEnd="@dimen/et_margin_start_end"
             android:background="@drawable/edit_text_shape"
+            android:contentDescription="Application_Name Logo"
             android:gravity="center"
             android:hint="Email"
+            android:textColorHint="@color/gray"
             android:textSize="18sp" />
 
         <EditText
@@ -71,8 +98,10 @@
             android:layout_marginTop="@dimen/et_margin_vertical"
             android:layout_marginEnd="@dimen/et_margin_start_end"
             android:background="@drawable/edit_text_shape"
+            android:contentDescription="Application_Name Logo"
             android:gravity="center"
             android:hint="Name"
+            android:textColorHint="@color/gray"
             android:textSize="18sp" />
 
 
@@ -87,6 +116,7 @@
             android:gravity="center"
             android:hint="Phone Number"
             android:inputType="phone"
+            android:textColorHint="@color/gray"
             android:textSize="18sp"
             android:visibility="visible" />
 
@@ -101,6 +131,7 @@
             android:gravity="center"
             android:hint="Old Password"
             android:inputType="textPassword"
+            android:textColorHint="@color/gray"
             android:textSize="18sp" />
 
         <EditText
@@ -114,6 +145,7 @@
             android:gravity="center"
             android:hint="New Password"
             android:inputType="textPassword"
+            android:textColorHint="@color/gray"
             android:textSize="18sp" />
 
 

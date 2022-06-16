@@ -7,11 +7,12 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.grad.gp.Auth.EditProfile;
 import com.grad.gp.R;
 
 public class HomePage extends AppCompatActivity {
 
-    ImageView mAlzheimer , mVisuallyImpaired;
+    ImageView mAlzheimer , mVisuallyImpaired, mEditProfileBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,9 +25,16 @@ public class HomePage extends AppCompatActivity {
     private void initViews() {
         mAlzheimer = findViewById(R.id.alzheimer_btn);
         mVisuallyImpaired = findViewById(R.id.visually_impaired);
+        mEditProfileBtn = findViewById(R.id.edit_profile_btn);
 
         mAlzheimer.setOnClickListener(v -> goToAlzhimerPage());
         mVisuallyImpaired.setOnClickListener(v -> goToVisuallyImpaired());
+        mEditProfileBtn.setOnClickListener(v -> goToEditProfile());
+    }
+
+    private void goToEditProfile() {
+        Intent i = new Intent(HomePage.this, EditProfile.class);
+        startActivity(i);
     }
 
     private void goToVisuallyImpaired() {

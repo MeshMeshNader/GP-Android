@@ -1,34 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home.Zhaimer"
     android:background="@drawable/background"
-    >
+    tools:context=".Home.Zhaimer">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/blue">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/edit_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/ic_baseline_arrow_back_ios_24" />
+
+            <TextView
+                android:id="@+id/admin_page_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="5dp"
+                android:text="Face Recognition"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
 
     <ImageView
         android:id="@+id/face_recognition_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/facereco"
+        android:layout_below="@id/tool_bar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        />
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/facereco" />
+
+    <ImageView
+        android:id="@+id/person_image_response"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_below="@id/face_recognition_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_start_end"
+        android:padding="15dp"
+        android:scaleType="fitCenter" />
 
     <TextView
         android:id="@+id/face_recognition_response"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_below="@id/person_image_response"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="50dp"
+        android:layout_marginTop="@dimen/margin_start_end"
         android:layout_marginEnd="50dp"
         android:gravity="center"
         android:text=""
         android:textColor="@color/blue"
         android:textSize="22sp"
         android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/gallery_btn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/et_height"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/et_margin_start_end"
+        android:layout_marginEnd="@dimen/et_margin_start_end"
+        android:layout_marginBottom="@dimen/_30sdp"
+        android:background="@drawable/button_shape_blue"
+        android:text="Gallery"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="22sp" />
 
 </RelativeLayout>

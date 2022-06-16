@@ -6,26 +6,57 @@
     android:background="@drawable/background"
     tools:context=".Auth.Login">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/blue">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+
+            <TextView
+                android:id="@+id/admin_page_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="5dp"
+                android:text="Login"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+
     <ImageView
         android:id="@+id/login_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tool_bar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:orientation="vertical"
         android:src="@drawable/logo" />
 
-    <TextView
-        android:id="@+id/login_logo_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/login_logo"
-        android:layout_centerHorizontal="true"
-        android:text="Login"
-        android:textColor="@color/blue"
-        android:textSize="25sp"
-        android:textStyle="bold" />
+    <!--    <TextView-->
+    <!--        android:id="@+id/login_logo_text"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@id/login_logo"-->
+    <!--        android:layout_centerHorizontal="true"-->
+    <!--        android:text="Login"-->
+    <!--        android:textColor="@color/blue"-->
+    <!--        android:textSize="25sp"-->
+    <!--        android:textStyle="bold" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,6 +75,7 @@
             android:background="@drawable/edit_text_shape"
             android:gravity="center"
             android:hint="Email"
+            android:textColorHint="@color/gray"
             android:textSize="18sp" />
 
 
@@ -58,8 +90,8 @@
             android:gravity="center"
             android:hint="Password"
             android:inputType="textPassword"
+            android:textColorHint="@color/gray"
             android:textSize="18sp" />
-
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/login_login_btn"

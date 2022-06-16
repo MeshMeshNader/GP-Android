@@ -1,9 +1,11 @@
 package com.grad.gp.Home;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
@@ -13,6 +15,7 @@ import android.speech.tts.TextToSpeech;
 import android.util.Base64;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,7 +43,10 @@ import retrofit2.Response;
 
 public class VisuallyImpaired extends AppCompatActivity {
 
+    ImageView mBackBtn;
     final static int Gallery_Pick = 1;
+    private static final int CAMERA_REQUEST = 1888;
+    private static final int MY_CAMERA_PERMISSION_CODE = 100;
     ImageView mFaceDetection, mImageCaptioning,
             mObjectDetection, mLabelsDetection,
             mCurrencyDetection, mTextReader;
@@ -68,6 +74,10 @@ public class VisuallyImpaired extends AppCompatActivity {
     }
 
     private void initViews() {
+
+        mBackBtn=findViewById(R.id.edit_back);
+        mBackBtn.setOnClickListener(v -> onBackPressed());
+
         mFaceDetection = findViewById(R.id.face_detection_btn);
         mObjectDetection = findViewById(R.id.object_detection_btn);
         mImageCaptioning = findViewById(R.id.image_captioning_btn);
@@ -76,15 +86,12 @@ public class VisuallyImpaired extends AppCompatActivity {
         mTextReader = findViewById(R.id.text_reader_btn);
 
 
-
-
         mFaceDetection.setOnClickListener(v -> FaceDetectionAPI());
         mObjectDetection.setOnClickListener(v -> ObjectDetectionAPI());
         mImageCaptioning.setOnClickListener(v -> ImageCaptioningAPI());
         mLabelsDetection.setOnClickListener(v -> LabelsDetectionAPI());
         mCurrencyDetection.setOnClickListener(v -> CurrencyDetectionAPI());
         mTextReader.setOnClickListener(v -> TextReaderAPI());
-
 
 
     }
@@ -120,8 +127,6 @@ public class VisuallyImpaired extends AppCompatActivity {
         opCode = "6";
         showSelectDialog();
     }
-
-
 
 
     public static String getStringImage(Bitmap bmp) {
@@ -207,8 +212,12 @@ public class VisuallyImpaired extends AppCompatActivity {
     }
 
     private void takePhoto() {
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        startActivity(intent);
+        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+        } else {
+            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(cameraIntent, CAMERA_REQUEST);
+        }
     }
 
     @AfterPermissionGranted(101)
@@ -245,6 +254,15 @@ public class VisuallyImpaired extends AppCompatActivity {
                 }
             }
         }
+        if (requestCode == MY_CAMERA_PERMISSION_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+            } else {
+                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
 
@@ -258,13 +276,16 @@ public class VisuallyImpaired extends AppCompatActivity {
                     try {
                         InputStream inputStream = this.getContentResolver().openInputStream(data.getData());
                         Bitmap bits = BitmapFactory.decodeStream(inputStream);
-                        Bitmap reducedBits = ImageResizer.reduceBitmapSize(bits , 240000);
+                        Bitmap reducedBits = ImageResizer.reduceBitmapSize(bits, 240000);
                         requestOutput(reducedBits, opCode);
                     } catch (Exception e) {
                         Log.e("Error", "onActivityResult: " + e.getMessage());
                     }
                 }
             }
+        } else if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            requestOutput(photo, opCode);
         }
     }
 

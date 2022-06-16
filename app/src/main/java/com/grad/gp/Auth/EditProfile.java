@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +34,8 @@ import com.grad.gp.Utils.CustomProgress;
 public class EditProfile extends AppCompatActivity {
 
 
-    TextView mWelcomeText , mBackBtn;
+//    TextView mWelcomeText;
+    ImageView mBackBtn;
     Button mSave, mLogout;
     EditText mName, mEmail, mPhoneNumber, mOldPassword, mNewPassword;
 
@@ -58,7 +60,7 @@ public class EditProfile extends AppCompatActivity {
 
     private void initViews() {
 
-        mWelcomeText = findViewById(R.id.edit_welcome_text);
+//        mWelcomeText = findViewById(R.id.edit_welcome_text);
         mBackBtn=findViewById(R.id.edit_back);
         mBackBtn.setOnClickListener(v -> onBackPressed());
         //Button
@@ -99,7 +101,7 @@ public class EditProfile extends AppCompatActivity {
                     userData = snapshot.getValue(UserDataModel.class);
                     mName.setText(userData.getName());
                     mEmail.setText(userData.getEmail());
-                    mWelcomeText.setText("Welcome " + userData.getName());
+//                    mWelcomeText.setText("Welcome " + userData.getName());
                     mEmail.setEnabled(false);
                     mPhoneNumber.setText(userData.getPhoneNumber());
                     mCustomProgress.hideProgress();

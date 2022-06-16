@@ -11,18 +11,20 @@ public class UserDataModel {
     String password;
     Map<String, String> encodings;
     Map<String, String> ImagesURLs;
+    Map<String, String> personsData;
 
     public UserDataModel() {
     }
 
-    public UserDataModel(String userID, String name, String email, String phoneNumber, String password, Map<String, String> encodings, Map<String, String> ImagesURLs) {
+    public UserDataModel(String userID, String name, String email, String phoneNumber, String password, Map<String, String> encodings, Map<String, String> imagesURLs, Map<String, String> personsData) {
         UserID = userID;
         Name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
         this.encodings = encodings;
-        this.ImagesURLs = ImagesURLs;
+        ImagesURLs = imagesURLs;
+        this.personsData = personsData;
     }
 
     public String getUserID() {
@@ -77,8 +79,16 @@ public class UserDataModel {
         return ImagesURLs;
     }
 
-    public void setImagesURLs(Map<String, String> ImagesURLs) {
-        this.ImagesURLs = ImagesURLs;
+    public void setImagesURLs(Map<String, String> imagesURLs) {
+        ImagesURLs = imagesURLs;
+    }
+
+    public Map<String, String> getPersonsData() {
+        return personsData;
+    }
+
+    public void setPersonsData(Map<String, String> personsData) {
+        this.personsData = personsData;
     }
 }
 

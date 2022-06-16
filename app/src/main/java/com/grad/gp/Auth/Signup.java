@@ -122,7 +122,7 @@ public class Signup extends AppCompatActivity {
                 mName.getText().toString(),
                 mEmail.getText().toString(),
                 mPhoneNumber.getText().toString(),
-                password,map,mImagesURL);
+                password,map,mImagesURL,map);
 
         UsersRef.child(currentUserID).setValue(dataModel).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

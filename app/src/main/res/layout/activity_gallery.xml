@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".Home.HomePage">
+    android:orientation="vertical"
+    tools:context=".Home.Gallery.GalleryActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tool_bar"
@@ -19,13 +20,13 @@
             android:gravity="center_vertical">
 
             <ImageView
-                android:id="@+id/edit_profile_btn"
+                android:id="@+id/edit_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:contentDescription="Back"
                 android:layout_marginLeft="16dp"
-                android:contentDescription="Edit Profile"
-                android:src="@drawable/ic_baseline_person_24" />
+                android:src="@drawable/ic_baseline_arrow_back_ios_24" />
 
             <TextView
                 android:id="@+id/admin_page_title"
@@ -34,8 +35,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_marginTop="5dp"
-                android:contentDescription="Home Page"
-                android:text="Home"
+                android:contentDescription="Gallery Page"
+                android:text="Gallery"
                 android:textColor="@color/white"
                 android:textSize="22sp"
                 android:textStyle="bold" />
@@ -44,25 +45,11 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <ImageView
-        android:id="@+id/alzheimer_btn"
-        android:layout_width="@dimen/_200sdp"
-        android:layout_height="@dimen/_350sdp"
-        android:layout_below="@id/tool_bar"
-        android:layout_marginLeft="-5dp"
-        android:layout_marginTop="-5dp"
-        android:contentDescription="AlZheimer Mode"
-        android:src="@drawable/alzheimer_l" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/gallery_items_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="15dp" />
 
-    <ImageView
-        android:id="@+id/visually_impaired"
-        android:layout_width="@dimen/_200sdp"
-        android:layout_height="@dimen/_350sdp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginRight="-5dp"
-        android:layout_marginBottom="-5dp"
-        android:contentDescription="Visually Impaired Mode"
-        android:src="@drawable/visually_impaired_r" />
-
-</RelativeLayout>
+</LinearLayout>
